@@ -16,7 +16,7 @@ To run the simulation, ensure the following dependencies are met:
 - Julia packages required: 
    ``` julia
    using Pkg
-   Pkg.add(["DataStructures", "DelimitedFiles", "Distributions", "QuadGK", "LinearAlgebra"])
+   Pkg.add(["DataStructures", "DelimitedFiles", "Distributions", "QuadGK", "LinearAlgebra", "DataFrames", "CSV"])
 
 ## Installation
 
@@ -25,3 +25,15 @@ To run the simulation, ensure the following dependencies are met:
    git clone https://github.com/bartaa89/n_interact.git
    cd n_interact
 
+## Example usage
+   ```julia
+   include("simulate.jl")
+   # Define the parameters
+   N = 10^3; ancestor = 2;
+   M = [0.5   0.5   0.0   0.0;
+        0.25  0.5   0.25  0.0;
+        0.0   0.25  0.5   0.25;
+        0.0   0.0   0.5   0.5];
+   b = .1; c = .1;
+   # Write process into .csv file
+   procmaker("data.csv")
