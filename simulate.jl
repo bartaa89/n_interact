@@ -3,6 +3,8 @@ using DelimitedFiles
 using Distributions
 using QuadGK
 using LinearAlgebra
+using DataFrames
+using CSV
 
 @doc """
     sim(N,ancestor,M,b,c)
@@ -84,8 +86,8 @@ M = [0.5   0.5   0.0   0.0
 b = .1; c = .1;
 
 ###
-# Number of simulations
-function procmaker(filename,NP)
+# NP: Number of processes
+function procmaker(filename,NP=1)
     TIMES = []; TYPES = [];
 
     for j in 1:NP
@@ -100,7 +102,7 @@ function procmaker(filename,NP)
         #writedlm(j*".txt", [times,types])
     end
 
-    writedlm(filename, [times,types])
+    CSV.write(filename, DataFrame(time = TIMES,type = TYPES))
 end
 ###
 # Malthusian approxiamtion
