@@ -1,6 +1,8 @@
 using DataStructures
 using DelimitedFiles
 using Distributions
+using QuadGK
+using LinearAlgebra
 
 @doc """
     sim(N,ancestor,M,b,c)
@@ -81,15 +83,64 @@ M = [0.5   0.5   0.0   0.0
         0.0   0.0   0.5   0.5];
 b = .1; c = .1;
 
+###
 # Number of simulations
-NS = 100
+function procmaker(filename,NP)
+    TIMES = []; TYPES = [];
 
-for j in 1:NS
-    ext = false
-    times = []
-    types = []
-    while !ext
-        (ext,times,types) = sim(N,ancestor,M,b,c)
+    for j in 1:NP
+        ext = false
+        times = []
+        types = []
+        while !ext
+            (ext,times,types) = sim(N,ancestor,M,b,c)
+        end
+        TIMES = [TIMES; times]
+        TYPES = [TYPES; types]
+        #writedlm(j*".txt", [times,types])
     end
-    writedlm(j*".txt", [times,types])
+
+    writedlm(filename, [times,types])
+end
+###
+# Malthusian approxiamtion
+
+@doc"""
+    malt(M)
+
+Input:
+    M: 
+        transition matrix
+
+Output:
+    slope:
+        approximation of the Malthusian parameter
+""" ->
+function malt(M)
+    function secant(f,x0,x1,tol=1e-14)
+        f0=f(x0)
+        f1=f(x1)
+        while abs(x1-x0)>tol
+          x2=x1-f1*(x1-x0)/(f1-f0)#; print(x2)
+          f0=f1
+          x0=x1
+          f1=f(x2)
+          x1=x2
+        end
+        x1
+    end
+  ty_num = size(M)[1]
+
+  v = eigvecs(M)[:,ty_num]
+  v = v / sum(v)
+  u = eigvecs(M')[:,ty_num]
+  u = v.*u
+  u = u / sum(u)
+
+  function A(x)
+    f(u)=1/c*(1-u)^((x+b+1)/c-1)*exp(u/c)
+    quadgk(f,0,1)[1]-1
+  end
+
+  slope = secant(A,0.1,0.6)
 end
