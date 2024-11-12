@@ -1,4 +1,5 @@
-# Continuous-Time Network Evolution Model - Simulation Code
+# Continuous-Time Network Evolution Model Describing *N*-interactions 
+# Simulation Code
 
 This repository contains the simulation code for the continuous-time network evolution model as described in the accompanying paper. The simulation is implemented in the Julia programming environment, leveraging its dynamic structure for efficient numerical computations.
 
@@ -13,7 +14,7 @@ The simulation provides empirical evidence for the model's asymptotic properties
 To run the simulation, ensure the following dependencies are met:
 
 - **Julia 1.x** or higher
-- Julia packages for numerical and statistical analysis 
+- Julia packages required: 
    ``` julia
    using Pkg
    Pkg.add(["DataStructures", "DelimitedFiles", "Distributions"])
