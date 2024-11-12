@@ -14,9 +14,9 @@ To run the simulation, ensure the following dependencies are met:
 
 - **Julia 1.x** or higher
 - Julia packages for numerical and statistical analysis 
-``` julia
-using Pkg
-Pkg.add(["DataStructures", "DelimitedFiles", "Distributions"])
+   ``` julia
+   using Pkg
+   Pkg.add(["DataStructures", "DelimitedFiles", "Distributions"])
 
 ## Installation
 
