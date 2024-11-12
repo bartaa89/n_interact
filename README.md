@@ -26,6 +26,8 @@ To run the simulation, ensure the following dependencies are met:
    cd n_interact
 
 ## Example usage
+
+1. Simulate the process in Julia.
    ```julia
    include("simulate.jl")
    # Define the parameters
@@ -35,5 +37,10 @@ To run the simulation, ensure the following dependencies are met:
         0.0   0.25  0.5   0.25;
         0.0   0.0   0.5   0.5];
    b = .1; c = .1;
+   # Get the Malthusian parameter
+   malt(M)
    # Write process into .csv file
    procmaker("data.csv")
+
+2. Investigate the results in R.
+   Use the 'plotter.R' script.
