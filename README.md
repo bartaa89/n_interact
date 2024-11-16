@@ -12,7 +12,7 @@ The simulation provides empirical evidence for the model's asymptotic properties
 
 To run the simulation, ensure the following dependencies are met:
 
-- **Julia 1.x** or higher
+- **Julia 1.x** or higher and **R**
 - Julia packages required: 
    ``` julia
    using Pkg
